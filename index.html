@@ -176,60 +176,60 @@
 
     <script>
         // --- ADMIN CONFIGURATION ---
-        const ADMIN_NOTICE = "Our EID special tournament will start in 25 March, 2026! Ensure your squad is registered one day before the tournament date. Stay tuned for the slot list.";
+        const ADMIN_NOTICE = "Our weekly tournament starts this Friday! Ensure your squad is registered before Thursday night. Stay tuned for the slot list.";
         document.getElementById('adminNoticeText').innerText = ADMIN_NOTICE;
 
-        // YouTube Fetching & Shuffling Logic
-        async function fetchVideos() {
-            const channelID = 'UCCh-X0964mXF5K5mR_yW6LmA'; 
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`;
-            const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-            
+
+        // --- YOUTUBE LIST & SHUFFLE LOGIC ---
+        function displayVideos() {
+            const videoList = [
+                { id: "m3rCjGAkDCs", title: "Latest Highlight 1" },
+                { id: "LPdf7Z3rpb4", title: "Latest Highlight 2" },
+                { id: "3cBfclo7SY0", title: "Latest Highlight 3" },
+                { id: "XgLYHxrEPSI", title: "Latest Highlight 4" },
+                { id: "bVLHqkL74EA", title: "Latest Highlight 5" },
+                { id: "ykF16Oie38U", title: "Latest Highlight 6" },
+                { id: "Cc6lMTT_76k", title: "Latest Highlight 7" },
+                { id: "vA-y3i_22wQ", title: "Latest Highlight 8" },
+                { id: "IDTTmj3x0HM", title: "Latest Highlight 9" },
+                { id: "Yjv_X_P0aBc", title: "Latest Highlight 10" },
+                { id: "c02vdAo_rMc", title: "Latest Highlight 11" },
+                { id: "166C2kNx_L8", title: "Latest Highlight 12" },
+                { id: "TtOraeZFKBE", title: "Latest Highlight 13" },
+                { id: "ISsQmBcE8JM", title: "Latest Highlight 14" },
+                { id: "S3KYNVph6bc", title: "Latest Highlight 15" }
+            ];
+
             const container = document.getElementById('youtubeFeed');
+            
+            // ১. ভিডিওগুলো সাফল (Shuffle) করা
+            videoList.sort(() => Math.random() - 0.5);
 
-            try {
-                const res = await fetch(api);
-                const data = await res.json();
-                
-                if (data.status === 'ok') {
-                    container.innerHTML = '';
-                    
-                    // শেষ ১০টি ভিডিওর লিস্ট পাওয়া
-                    let allVideos = data.items;
+            // ২. প্রথম ৩টি ভিডিও নেওয়া
+            const selectedVideos = videoList.slice(0, 3);
 
-                    // ভিডিওগুলো এলোমেলো (Shuffle) করা
-                    allVideos.sort(() => Math.random() - 0.5);
+            container.innerHTML = '';
+            
+            selectedVideos.forEach(video => {
+                const videoUrl = `https://youtu.be/${video.id}`;
+                const thumbnail = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
 
-                    // প্রথম ৩টি ভিডিও নির্বাচন করা
-                    const selectedVideos = allVideos.slice(0, 3);
-
-                    selectedVideos.forEach(item => {
-                        const videoId = item.guid.split(':').pop();
-                        // High Quality Thumbnail
-                        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-
-                        container.innerHTML += `
-                            <div class="video-card">
-                                <div class="thumb-container" onclick="window.open('${item.link}', '_blank')">
-                                    <img src="${thumbnail}" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'" alt="${item.title}">
-                                    <div class="play-icon"><i class="fas fa-play-circle"></i></div>
-                                </div>
-                                <div class="video-info">
-                                    <h4>${item.title}</h4>
-                                    <a href="${item.link}" target="_blank" style="color:var(--primary); text-decoration:none; font-size:0.85rem; font-weight:bold;">Watch Video →</a>
-                                </div>
-                            </div>`;
-                    });
-                } else {
-                    throw new Error();
-                }
-            } catch(e) { 
-                container.innerHTML = `<p style="text-align:center; width:100%;">Please visit <a href="https://www.youtube.com/@nextrixyt" target="_blank" style="color:red;">Nextrix YT</a> for latest highlights.</p>`;
-            }
+                container.innerHTML += `
+                    <div class="video-card">
+                        <div class="thumb-container" onclick="window.open('${videoUrl}', '_blank')">
+                            <img src="${thumbnail}" onerror="this.src='https://img.youtube.com/vi/${video.id}/hqdefault.jpg'" alt="Video">
+                            <div class="play-icon"><i class="fas fa-play-circle"></i></div>
+                        </div>
+                        <div class="video-info">
+                            <h4>${video.title}</h4>
+                            <a href="${videoUrl}" target="_blank" style="color:var(--primary); text-decoration:none; font-size:0.85rem; font-weight:bold;">Watch Video →</a>
+                        </div>
+                    </div>`;
+            });
         }
 
-        window.onload = fetchVideos;
+        // পেজ লোড হলে ফাংশনটি চলবে
+        window.onload = displayVideos;
     </script>
 </body>
-
 </html>
