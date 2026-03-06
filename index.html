@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brothers E-sports | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF0000;
+            --bg-dark: #0a0a0a;
+            --bg-card: #161616;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-white); scroll-behavior: smooth; }
+
+        /* Navbar */
+        nav { position: fixed; width: 100%; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: white; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* Hero */
+        #home { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80'); background-size: cover; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; }
+        .btn { padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; text-decoration: none; display: inline-block; text-align: center; }
+
+        /* Notice Board */
+        .notice-board { background: #220000; border-left: 5px solid var(--primary); padding: 20px; margin: 20px 5%; border-radius: 5px; }
+        .notice-tag { color: var(--primary); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* Sections */
+        section { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 40px; color: var(--primary); font-size: 2.5rem; }
+
+        /* --- Updated Videos Section CSS --- */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .video-card { background: var(--bg-card); border-radius: 10px; overflow: hidden; transition: 0.3s; border: 1px solid #222; }
+        .video-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(255, 0, 0, 0.1); }
+        
+        .thumb-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
+        
+        /* Thumbnail Hover Effect */
+        .thumb-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: 0.4s ease; 
+            display: block;
+        }
+        .video-card:hover .thumb-container img { 
+            transform: scale(1.1); 
+            filter: brightness(0.6); 
+        }
+
+        /* Play Icon Effect */
+        .play-icon { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-size: 3.5rem; 
+            color: white; 
+            opacity: 0; 
+            transition: 0.3s ease; 
+            z-index: 2;
+        }
+        .video-card:hover .play-icon { 
+            opacity: 1; 
+            color: var(--primary); 
+        }
+
+        .video-info { padding: 15px; }
+        .video-info h4 { font-size: 1rem; color: #fff; line-height: 1.4; height: 2.8em; overflow: hidden; margin-bottom: 10px; }
+
+        /* Tournament */
+        .tournament-box { background: var(--bg-card); padding: 30px; border-radius: 15px; max-width: 600px; margin: auto; border: 1px solid var(--primary); }
+        .payment-info { background: var(--glass); padding: 15px; margin-bottom: 20px; text-align: center; border-radius: 5px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
+        input:focus { border-color: var(--primary); outline: none; }
+
+        /* Contact & Footer */
+        .contact-form { max-width: 600px; margin: auto; }
+        footer { text-align: center; padding: 40px; background: #000; }
+        footer a { color: white; text-decoration: none; font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
+        footer a:hover { color: var(--primary); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #000; padding: 20px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Brothers E-sports</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#tournaments">Tournaments</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero">
+            <h1>WELCOME TO THE ARENA</h1>
+            <p>Join the next generation of professional E-sports.</p><br>
+            <a href="#tournaments" class="btn">Register Squad</a>
+        </div>
+    </header>
+
+    <div class="notice-board">
+        <span class="notice-tag"><i class="fas fa-bullhorn"></i> Admin Notice:</span>
+        <p id="adminNoticeText">Loading notice...</p>
+    </div>
+
+    <section id="videos">
+        <h2 class="section-title">Latest Highlights</h2>
+        <div class="video-grid" id="youtubeFeed">Loading Videos...</div>
+    </section>
+
+    <section id="tournaments">
+        <h2 class="section-title">Join Tournament</h2>
+        <div class="tournament-box">
+            <div class="payment-info">
+                <h3>Entry Fee: 80 BDT / Squad</h3>
+                <p>Send money to Bkash: <strong>+8801332689739</strong></p>
+            </div>
+            <form action="https://formspree.io/f/mdawonoq" method="POST" id="regForm">
+                <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
+                <input type="text" name="UID" placeholder="In-game UID (Leader)" required>
+                <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
+                <input type="text" name="Transaction ID" placeholder="Transaction ID (Bkash)" required>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <p style="text-align: center; max-width: 800px; margin: auto;">Brothers E-sports is a community for competitive gamers. We host weekly tournaments and provide high-quality gaming content.</p>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <form action="https://formspree.io/f/xaqpywyn" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" style="width: 100%; height: 100px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; padding: 10px; border-radius: 5px;" placeholder="Message" required></textarea>
+            <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div style="margin-bottom: 15px;">
+            <a href="https://www.youtube.com/@nextrixyt" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/share/1DjARJXA93/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://discord.gg/5JbpaZuh" target="_blank"><i class="fab fa-discord"></i></a>
+        </div>
+        <p>&copy; 2026 Brothers E-sports</p>
+    </footer>
+
+    <script>
+        // --- ADMIN CONFIGURATION ---
+        const ADMIN_NOTICE = "Our weekly tournament starts this Friday! Ensure your squad is registered before Thursday night. Stay tuned for the slot list.";
+        document.getElementById('adminNoticeText').innerText = ADMIN_NOTICE;
+
+        // YouTube Fetching & Shuffling Logic
+        async function fetchVideos() {
+            const channelID = 'UCCh-X0964mXF5K5mR_yW6LmA'; 
+            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`;
+            const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+            
+            const container = document.getElementById('youtubeFeed');
+
+            try {
+                const res = await fetch(api);
+                const data = await res.json();
+                
+                if (data.status === 'ok') {
+                    container.innerHTML = '';
+                    
+                    // শেষ ১০টি ভিডিওর লিস্ট পাওয়া
+                    let allVideos = data.items;
+
+                    // ভিডিওগুলো এলোমেলো (Shuffle) করা
+                    allVideos.sort(() => Math.random() - 0.5);
+
+                    // প্রথম ৩টি ভিডিও নির্বাচন করা
+                    const selectedVideos = allVideos.slice(0, 3);
+
+                    selectedVideos.forEach(item => {
+                        const videoId = item.guid.split(':').pop();
+                        // High Quality Thumbnail
+                        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+                        container.innerHTML += `
+                            <div class="video-card">
+                                <div class="thumb-container" onclick="window.open('${item.link}', '_blank')">
+                                    <img src="${thumbnail}" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'" alt="${item.title}">
+                                    <div class="play-icon"><i class="fas fa-play-circle"></i></div>
+                                </div>
+                                <div class="video-info">
+                                    <h4>${item.title}</h4>
+                                    <a href="${item.link}" target="_blank" style="color:var(--primary); text-decoration:none; font-size:0.85rem; font-weight:bold;">Watch Video →</a>
+                                </div>
+                            </div>`;
+                    });
+                } else {
+                    throw new Error();
+                }
+            } catch(e) { 
+                container.innerHTML = `<p style="text-align:center; width:100%;">Please visit <a href="https://www.youtube.com/@nextrixyt" target="_blank" style="color:red;">Nextrix YT</a> for latest highlights.</p>`;
+            }
+        }
+
+        window.onload = fetchVideos;
+    </script>
+</body>
+</html>
