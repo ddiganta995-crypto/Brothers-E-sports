@@ -176,8 +176,9 @@
 
     <script>
         // --- ADMIN CONFIGURATION ---
-        const ADMIN_NOTICE = "Our Eid special tournament will start very soon. We will announce the date and time in our facebook page, youtube channel, discord server and website. So stay tuned for the slot list.";
-        document.getElementById('adminNoticeText').innerText = ADMIN_NOTICE;
+const ADMIN_NOTICE = "<b>Registration Open: Eid Special Tournament</b><br><br>Registration for the <b>Eid Special Tournament</b> is now live! We invite all interested participants to register and secure their spots. The tournament schedule (date and time) will be announced immediately after all slots are filled.";
+
+document.getElementById('adminNoticeText').innerHTML = ADMIN_NOTICE;
 
 
         // --- YOUTUBE LIST & SHUFFLE LOGIC ---
@@ -233,4 +234,5 @@
     </script>
 </body>
 </html>
+
 
