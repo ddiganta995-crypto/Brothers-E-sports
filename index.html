@@ -134,20 +134,29 @@
     </section>
 
     <section id="tournaments">
-        <h2 class="section-title">Join Tournament</h2>
-        <div class="tournament-box">
-            <div class="payment-info">
-                <h3>Entry Fee: 80 BDT / Squad</h3>
-                <p>Send money to Bkash: <strong>+8801332689739</strong></p>
-            </div>
-            <form action="https://formspree.io/f/mdawonoq" method="POST" id="regForm">
-                <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
-                <input type="text" name="UID" placeholder="In-game UID (Leader)" required>
-                <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
-                <input type="text" name="Transaction ID" placeholder="Transaction ID (Bkash)" required>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
-            </form>
+    <h2 class="section-title">Join Tournament</h2>
+    <div class="tournament-box">
+        <div class="payment-info">
+            <h3>Entry Fee: 80 BDT / Squad</h3>
+            <p>Send money to Bkash: <strong>+8801332689739</strong></p>
         </div>
+        
+        <form action="https://api.web3forms.com/submit" method="POST" id="regForm">
+            
+            <input type="hidden" name="access_key" value="Ff16afd6-8b1c-48dc-b802-d36d558a38bb">
+            
+            <input type="hidden" name="subject" value="New Tournament Registration - Brothers E-sports">
+            
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+            <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
+            <input type="text" name="Leader UID" placeholder="In-game UID (Leader)" required>
+            <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
+            <input type="text" name="Transaction ID" placeholder="Transaction ID (Bkash)" required>
+            
+            <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
+        </form>
+    </div>
     </section>
 
     <section id="about">
@@ -234,6 +243,7 @@ document.getElementById('adminNoticeText').innerHTML = ADMIN_NOTICE;
     </script>
 </body>
 </html>
+
 
 
 
