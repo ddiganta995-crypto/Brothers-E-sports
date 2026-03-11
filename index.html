@@ -176,7 +176,18 @@
 
     <script>
         // --- ADMIN CONFIGURATION ---
-const ADMIN_NOTICE = "<b>Registration Open: Eid Special Tournament</b><br><br>Registration for the <b>Eid Special Tournament</b> is now live! We invite all interested participants to register and secure their spots. The tournament schedule (date and time) will be announced immediately after all slots are filled.";
+const ADMIN_NOTICE = `
+<div style="background: #1e293b; color: #fff; padding: 15px; border-radius: 10px; border: 1px solid #3b82f6; text-align: left; font-family: sans-serif;">
+    <h3 style="color: #3b82f6; margin-top: 0; text-align: center;">🏆 Point Rush Tournament</h3>
+    <p>📅 <b>Date:</b> March 12, 2026 | 🕙 <b>Time:</b> 11:30 AM</p>
+    <p>🗺️ <b>Maps:</b> 6 Matches | 📝 <b>Entry:</b> 40 BDT</p>
+    <div style="background: rgba(59, 130, 246, 0.1); padding: 8px; border-left: 3px solid #fbbf24; margin: 10px 0;">
+        <b>💰 Prize:</b> 🥇200 | 🥈120 | 🥉80 (BDT)
+    </div>
+    <p style="font-size: 13px;">📺 <b>Guide:</b> <a href="https://youtu.be/G502gOaFRl8" target="_blank" style="color: #f87171; text-decoration: none;">How to Register?</a></p>
+    <p style="color: #fbbf24; font-size: 12px; margin-bottom: 0;">⚠️ Limited slots! Register immediately.</p>
+</div>
+`;
 
 document.getElementById('adminNoticeText').innerHTML = ADMIN_NOTICE;
 
@@ -234,6 +245,7 @@ document.getElementById('adminNoticeText').innerHTML = ADMIN_NOTICE;
     </script>
 </body>
 </html>
+
 
 
 
