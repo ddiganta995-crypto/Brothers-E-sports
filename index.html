@@ -137,16 +137,39 @@
         <h2 class="section-title">Join Tournament</h2>
         <div class="tournament-box">
             <div class="payment-info">
-                <h3>Entry Fee: 80 BDT / Squad</h3>
+                <h3>Entry Fee: 40 BDT / Squad</h3>
                 <p>Send money to Bkash: <strong>+8801332689739</strong></p>
+                <p>Send money to Nagad: <strong>+8801973495268</strong></p>
             </div>
-            <form action="https://formspree.io/f/mlgpjqvg" method="POST">
-                <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
-                <input type="text" name="UID" placeholder="In-game UID (Leader)" required>
-                <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
-                <input type="text" name="Transaction ID" placeholder="Transaction ID (Bkash)" required>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
-            </form>
+            <form id="registrationForm" action="https://formspree.io/f/mlgpjqvg" method="POST">
+    <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
+    <input type="text" name="UID" placeholder="In-game UID (Leader)" required>
+    <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
+    
+    <p style="margin-top: 10px; font-size: 14px; color: #555;">যেকোনো একটি ট্রাঞ্জেকশন আইডি দিন (বিকাশ অথবা নগদ):</p>
+    
+    <input type="text" id="bkash_id" name="Bkash Transaction ID" placeholder="Bkash Transaction ID">
+    
+    <div style="text-align: center; margin: 5px 0;">OR</div>
+    
+    <input type="text" id="nagad_id" name="Nagad Transaction ID" placeholder="Nagad Transaction ID">
+    
+    <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
+</form>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const bkashInput = document.getElementById('bkash_id');
+    const nagadInput = document.getElementById('nagad_id');
+
+    form.addEventListener('submit', function (e) {
+        // যদি দুইটা বক্সই খালি থাকে, তবে সাবমিট হবে না
+        if (!bkashInput.value && !nagadInput.value) {
+            e.preventDefault(); // ফর্ম সাবমিট হওয়া আটকাবে
+            alert("অনুগ্রহ করে বিকাশ অথবা নগদ—যেকোনো একটির ট্রাঞ্জেকশন আইডি দিন।");
+        }
+    });
+</script>
         </div>
     </section>
 
@@ -246,6 +269,7 @@ document.getElementById('adminNoticeText').innerHTML = ADMIN_NOTICE;
     </script>
 </body>
 </html>
+
 
 
 
