@@ -137,17 +137,41 @@
         <h2 class="section-title">Join Tournament</h2>
         <div class="tournament-box">
             <div class="payment-info">
-                <h3>Entry Free</h3>
+                <h3>Entry Fee: 80 BDT / Squad</h3>
+                <p>Send money to Bkash: <strong>+8801332689739</strong></p>
             </div>
             <form id="registrationForm" action="https://formspree.io/f/mlgpjqvg" method="POST">
     <input type="text" name="Squad Name" placeholder="Your Squad Name" required>
-    <input type="text" name="UID" placeholder="In-game UID (Leader)" required>
+    <input type="text" name="IGL Name" placeholder="In-game IGL Name (Leader)" required>
     <input type="text" name="Whatsapp" placeholder="WhatsApp Number" required>
+    
+    <p style="margin-top: 10px; font-size: 14px; color: #555;">Please provide the transaction ID of either bKash or Nagad.:</p>
+    
+    <input type="text" id="bkash_id" name="Bkash Transaction ID" placeholder="Bkash Transaction ID">
+    
+    <div style="text-align: center; margin: 5px 0;">OR</div>
+    
+    <input type="text" id="nagad_id" name="Nagad Transaction ID" placeholder="Nagad Transaction ID">
     
     <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Submit Registration</button>
 </form>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const bkashInput = document.getElementById('bkash_id');
+    const nagadInput = document.getElementById('nagad_id');
+
+    form.addEventListener('submit', function (e) {
+        // যদি দুইটা বক্সই খালি থাকে, তবে সাবমিট হবে না
+        if (!bkashInput.value && !nagadInput.value) {
+            e.preventDefault(); // ফর্ম সাবমিট হওয়া আটকাবে
+            alert("Please provide the transaction ID of either bKash or Nagad.");
+        }
+    });
+</script>
         </div>
     </section>
+
 
     <section id="about">
         <h2 class="section-title">About Us</h2>
@@ -177,12 +201,12 @@
         // --- ADMIN CONFIGURATION ---
 const ADMIN_NOTICE = `
 <div text-align: left; font-family: sans-serif;">
-    <h3 style="color: #3b82f6; margin-top: 0; text-align: center;">🏆 Point Rush Tournament 🏆</h3>
-    <p>📅 <b>Date:</b> March 13, 2026 | 🕙 <b>Time:</b> 3:20 PM</p>
-    <p>🗺️ <b>Maps:</b> 6 Matches (B/P/K/A/N/S)</P>
-    <P>📝 <b>Entry:</b> Free</p>
+    <h3 style="color: #3b82f6; margin-top: 0; text-align: center;">🏆 Champion Rush Tournament 🏆</h3>
+    <p>📅 <b>Date:</b> March 14, 2026 | 🕙 <b>Time:</b> 6:00 PM</p>
+    <p>🗺️ <b>Maps:</b> 6 Matches (B/P/K)</P>
+    <P>📝 <b>Entry:</b> 40 BDT</p>
     <div style="background: rgba(59, 130, 246, 0.1); padding: 8px; border-left: 3px solid #fbbf24; margin: 10px 0;">
-        <b>💰 Prize:</b> 🥇80 | 🥈50 | 🥉30 (BDT)
+        <b>💰 Prize:</b> 🥇160 | 🥈120 | 🥉80 | 🥉40 (BDT)
     </div>
     <p style="font-size: 13px;">📺 <b>Guide:</b> <a href="https://youtu.be/G502gOaFRl8" target="_blank" style="color: #f87171; text-decoration: none;">How to Register?</a></p>
     <p style="color: #fbbf24; font-size: 12px; margin-bottom: 0;"></p>
